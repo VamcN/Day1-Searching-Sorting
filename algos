@@ -1,0 +1,119 @@
+
+public class SearchingandSorting{
+	/*
+	 * Linear Search
+	 */
+	int linearSearch(int arr[],int key) {
+	 for(int i=0;i<=arr.length-1;i++) {
+		 if(arr[i]==key) {
+			 return i;
+		 }
+	 }
+	 return -1;
+	 }
+	
+	/*
+	 * Binary Search
+	 */
+	int binarySearch(int arr[],int key) {
+		int low=0,high=arr.length-1;
+		while(low<=high) {
+		int mid=(low+high)/2;
+		if (arr[mid]==key) {
+			return mid;
+		}
+		else if(key>arr[mid]) {
+			low=mid+1;
+		}
+		else {
+			high=mid-1;	
+		}
+		
+		}
+		return -1;
+		}
+	/*
+	 * Bubble Sort
+	 */
+	void bubbleSort(int arr[]) {
+		for(int i=0;i<=arr.length-2;i++) {
+			for(int j=0;j<=arr.length-2-i;j++) {
+				if (arr[j]>arr[j+1]){
+					int temp=arr[j+1];
+					arr[j+1]=arr[j];
+					arr[j]=temp;
+					}
+				}
+		}
+	}
+	/*
+	 * Selection sort
+	 */
+	void selectionSort(int arr[]) {
+		for(int i=0;i<=arr.length-2;i++) {
+			int minpos=i;
+			for(int j=i+1;j<=arr.length-1;j++) {
+				if(arr[minpos]>arr[j]) {
+					minpos=j;
+				}
+			}
+			int temp=arr[minpos];
+			arr[minpos]=arr[i];
+			arr[i]=temp;
+			
+		}
+	}
+	/*
+	 * Insertion Sort
+	 */
+	void insertionSort(int arr[]) {
+		for (int i=1;i<=arr.length-1;i++) {
+			int item=arr[i];
+			int j=i-1;
+				while(j>=0&&arr[j]>item) {
+					arr[j+1]=arr[j];
+					j--;
+				}
+				arr[j+1]=item;		
+		}
+	}
+	
+	/*
+	 * Counting Sort
+	 */
+	void countingSort(int arr[]) {
+		int largest=arr[0];
+		//to find max value
+		for(int i=0;i<=arr.length-1;i++) {
+			largest=Math.max(largest, arr[i]);
+		}
+		//to create new count array 
+		int count[]=new int[largest+1];
+		for(int i=0;i<=arr.length-1;i++) {
+			count[arr[i]]++;
+		}
+		//sorting of new array
+		int j=0;
+		for(int i=0;i<=count.length-1;i++) {
+			while(count[i]>0) {
+				arr[j]=i;
+				j++;
+				count[i]--;
+			}
+		}
+	}
+	
+	public static void main(String []args) {
+		int arr[]= {1,2,6,3,5,3,2,1,5,7};
+		SearchingandSorting searchingandSorting = new SearchingandSorting();
+		searchingandSorting.countingSort(arr);
+		for (int x : arr) {
+			System.out.print(x+" ");
+		}
+	}
+	
+	
+	
+	}
+ 
+
